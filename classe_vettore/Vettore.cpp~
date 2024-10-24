@@ -1,0 +1,31 @@
+#include "Vector.h"
+
+double Vector::X(){
+  return m_v[0];
+}
+
+double Vector::Y(){
+  return m_v[1];
+}
+
+double Vector::Z(){
+  return m_v[2];
+}
+
+void Vector::X(double x){
+  m_v[0] = x;
+}
+
+void Vector::Y(double y){
+  m_v[1] = y;
+}
+
+void Vector::Z(double z){
+  m_v[2] = z;
+}
+
+Vector Vector :: operator+(Vector b){
+  Vector res;
+  for(int i=0; i<3;i++){res.m_v[i]=m_v[i]+ b.m_v[i];}
+    return res;
+}

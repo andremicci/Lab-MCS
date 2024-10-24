@@ -1,0 +1,131 @@
+#ifndef _VECTOR
+#define _VECTOR
+
+#include <iostream>
+#include <cmath>
+
+class Vector{
+ public:
+  //costruttore per lista 
+  Vector(double x=0, double y=0, double z=0):m_v{x,y,z}{};
+
+  /*costruttore per assegnazione
+    Vector(double x=0,double y=0,double z=0){
+    m_v[0]=x;
+    m_v[1]=y;
+    m_v[2]=z;
+    }*/
+  
+  double X();
+  double Y();
+  double Z();
+  void X(double);
+  void Y(double);
+  void Z(double);
+
+  double mod();
+  Vector vers();
+  
+  Vector operator+(Vector);
+  Vector operator-();
+  Vector operator*(double);
+  double operator*(Vector);
+  Vector operator+=(Vector);
+  Vector Cross(const Vector&) const;
+  
+ private:
+  double m_v[3];
+};
+
+Vector operator*(double , Vector ); //funzione per definizione di alpha*V
+std :: ostream& operator<<(std::ostream& o, Vector a);
+
+
+//cpp definizione metodi
+
+double Vector::X(){
+  return m_v[0];
+}
+
+double Vector::Y(){
+  return m_v[1];
+}
+
+double Vector::Z(){
+  return m_v[2];
+}
+
+void Vector::X(double x){
+  m_v[0] = x;
+}
+
+void Vector::Y(double y){
+  m_v[1] = y;
+}
+
+void Vector::Z(double z){
+  m_v[2] = z;
+}
+
+Vector Vector :: operator+(Vector b){
+  Vector res;
+  for(int i=0; i<3;i++)res.m_v[i]=m_v[i]+ b.m_v[i];
+  return res;
+}
+
+Vector Vector :: operator-(){
+  Vector res;
+  for(int i=0; i<3;i++){
+    res.m_v[i]=-m_v[i];}
+    return res;
+}
+
+Vector Vector :: operator*(double val){
+    Vector res;
+    for(int i=0; i<3; i++){
+      res.m_v[i]=val*m_v[i];
+    }
+      return res;
+  }
+
+Vector operator*(double f, Vector a){
+  return a*f;
+}
+
+std :: ostream& operator<<(std::ostream& o, Vector a){
+  o << "(" << a.X() <<"," << a.Y() << ","<< a.Z()<<")";
+  return o;
+}
+
+
+double Vector:: operator*(Vector a){
+  double dotprod=0;
+  for(int i=0;i<3;i++){
+    dotprod+= (a.m_v[i])*m_v[i];
+  }
+  return dotprod;
+}
+
+double Vector :: mod(){
+  return sqrt((*this)*(*this));}
+
+Vector Vector :: vers(){
+  Vector vers;
+  double mod=(*this).mod();
+  for(int i=0;i<3;i++){
+    vers.m_v[i]= m_v[i]/mod;}
+  return vers;}
+     
+Vector Vector:: operator+=(Vector a){
+  *this= (*this)+a;
+  return *this;
+}
+
+Vector Vector::Cross(const Vector& b) const{
+  Vector res;
+  res.X(m_v[1]*b.m_v[2]-m_v[2]*b.m_v[1]);
+  res.Y(m_v[2]*b.m_v[0]-m_v[0]*b.m_v[2]);
+  res.Z(m_v[0]*b.m_v[1]-m_v[1]*b.m_v[0]);
+  return res;
+}
+#endif

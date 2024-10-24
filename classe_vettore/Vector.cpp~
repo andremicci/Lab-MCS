@@ -1,0 +1,76 @@
+#include "Vector.h"
+#include <cmath>
+
+double Vector::X(){
+  return m_v[0];
+}
+
+double Vector::Y(){
+  return m_v[1];
+}
+
+double Vector::Z(){
+  return m_v[2];
+}
+
+void Vector::X(double x){
+  m_v[0] = x;
+}
+
+void Vector::Y(double y){
+  m_v[1] = y;
+}
+
+void Vector::Z(double z){
+  m_v[2] = z;
+}
+
+Vector Vector :: operator+(Vector b){
+  Vector res;
+  for(int i=0; i<3;i++)res.m_v[i]=m_v[i]+ b.m_v[i];
+  return res;
+}
+
+Vector Vector :: operator-(){
+  Vector res;
+  for(int i=0; i<3;i++){
+    res.m_v[i]=-m_v[i];}
+    return res;
+}
+
+Vector Vector :: operator*(double val){
+    Vector res;
+    for(int i=0; i<3; i++){
+      res.m_v[i]=val*m_v[i];
+    }
+      return res;
+  }
+
+Vector operator*(double f, Vector a){
+  return a*f;
+}
+
+std :: ostream& operator<<(std::ostream& o, Vector a){
+  o << "(" << a.X() <<"," << a.Y() << ","<< a.Z()<<")";
+  return o;
+}
+
+
+double Vector:: operator*(Vector a){
+  double dotprod=0;
+  for(int i=0;i<3;i++){
+    dotprod+= (a.m_v[i])*m_v[i];
+  }
+  return dotprod;
+}
+
+double Vector :: mod(){
+  return sqrt((*this)*(*this));}
+
+Vector Vector :: vers(){
+  Vector vers;
+  double mod=(*this).mod();
+  for(int i=0;i<3;i++){
+    vers.m_v[i]= m_v[i]/mod;}
+  return vers;}
+    

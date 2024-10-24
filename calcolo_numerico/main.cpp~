@@ -1,0 +1,64 @@
+#include <iostream>
+#include "TApplication.h"
+#include "TGraph.h"
+#include "TCanvas.h"
+#include "TF1.h"
+using namespace std;
+
+double f_primo(TF1 f,double x){
+  double h=0.0000001;
+  return (f(x+h)-f(x-h))/(2*h);
+  
+}
+  double F(double x){
+    return 2*x;
+  }
+  
+  
+int main(){
+
+  TApplication app("app", 0,0);
+  /*double a=0;
+  double b=5;
+
+  TF1 f("fun","sqrt(x^2+5)",a,b);
+  
+  TGraph gr;
+  int s=0;
+  
+  for( double t=a; t<b;t+=0.0001){
+
+    gr.SetPoint(s,t,f_primo(f,t));
+    s++;
+  }
+  gr.Draw("AP");*/
+
+  cout << "eulero " << endl;
+  // risolviamo x'(t)=2t
+  // x(0)=0
+  //TF1 x;
+  TGraph gr1;
+  TF1 f("f","pow(x,2)+1",0,1);
+  
+  f.SetLineColor(kRed);
+  
+  
+  double h=0.0001;
+  double x=1;
+  for(int n=0; n<100;n++ ){
+    
+    double x_new = x+h*F(n*h);
+    x=x_new;
+    gr1.SetPoint(n,n*h,x_new);
+  }
+  gr1.SetMarkerColor(kBlue);
+  gr1.SetMarkerSize(1);
+  gr1.SetMarkerStyle(22);
+
+  
+  gr1.Draw("ALP");
+  f.Draw("same");
+  
+ app.Run(true);
+return 0;
+}

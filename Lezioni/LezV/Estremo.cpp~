@@ -1,0 +1,36 @@
+#include <iostream>
+#include "TF1.h"
+using namespace std;
+
+double Estremo(TF1 f,double a,double b,double c,double prec){
+
+
+  if(f(b)<f(a) && f(b)<f(c)==0){
+    cout << "Condizioni di partenza non soddisfatte" << endl;
+    exit(0);
+}
+
+ 
+    while(fabs(c-a)>prec){
+
+      double x=(b-c)/2;
+      if(f(x)<f(b)){
+	c=x;
+      }
+      else {
+	a=b;
+	b=x;}
+
+
+    }
+
+    return b;
+}
+
+int main(){
+
+
+  TF1 *f=new TF1("f","sin(x)/x",0,10);
+  cout << Estremo(*f,2,4,7,0.001) << endl;
+  
+}

@@ -1,0 +1,10 @@
+using namespace std;
+#include <iostream>
+int main(){
+  double a=1/8;
+  double b=0.3355;
+  double 
+  cout << a << endl;
+  cout << b << endl;
+  cout << 1/6 << endl;
+}

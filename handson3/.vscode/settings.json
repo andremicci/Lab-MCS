@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "fitexp.C": "cpp",
+        "fitexpTTree.C": "cpp"
+    }
+}
